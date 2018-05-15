@@ -1,0 +1,11 @@
+domain\Contents.class
+domain\Payload.class
+config\ApplicationConfig.class
+controller\WorldController.class
+controller\IndexController.class
+config\DispatcherServletConfig.class
+config\WebSecurityConfig.class
+controller\RESTController.class
+config\WebInitializer.class
+config\SecurityWebApplicationInitializer.class
+domain\Quotes.class

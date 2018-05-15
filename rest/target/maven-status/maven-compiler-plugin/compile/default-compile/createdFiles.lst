@@ -1,0 +1,7 @@
+domain\Contents.class
+config\DispatcherServletConfig.class
+controller\RESTController.class
+config\WebInitializer.class
+domain\Payload.class
+config\ApplicationConfig.class
+domain\Quotes.class

@@ -1,0 +1,15 @@
+game\domain\Tile.class
+game\db\WorldDb.class
+game\domain\Empty.class
+game\domain\Subject.class
+game\domain\Building.class
+game\db\WorldDbLocal.class
+game\domain\GameController.class
+game\db\DbException.class
+game\domain\GameService.class
+game\domain\Consumer.class
+game\domain\Observer.class
+game\domain\Farm.class
+game\db\WorldDbJpa.class
+game\domain\DomainException.class
+game\domain\World.class
