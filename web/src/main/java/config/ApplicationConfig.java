@@ -14,7 +14,7 @@ public class ApplicationConfig {
 
     @Bean
     public GameService service() {
-        return new GameService(new WorldDbLocal());
+        return new GameService(new WorldDbJpa());
     }
 
     @Bean

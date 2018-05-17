@@ -26,13 +26,14 @@ public class WorldDbJpa implements WorldDb {
         World karel = new World(mapKarel, 3, "Rusland");
         werelden.put(karel.getId(), karel);*/
 
-        World jef = new World(1);
-        World tom = new World(2, "Japan");
-        World karel = new World(3, "Rusland");
 
         entityManagerFactory = Persistence.createEntityManagerFactory("WorldDb");
         entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+
+        World jef = new World(getNextId());
+        World tom = new World(getNextId(), "Japan");
+        World karel = new World(getNextId(), "Rusland");
+
         addWorld(jef);
         addWorld(tom);
         addWorld(karel);
@@ -40,7 +41,7 @@ public class WorldDbJpa implements WorldDb {
 
     @Override
     public void addWorld(World world) {
-        //entityManager.getTransaction().begin();
+        entityManager.getTransaction().begin();
         if (entityManager.contains(world)) {
             throw new DbException("Wereld bestaat al");
         }
@@ -53,6 +54,7 @@ public class WorldDbJpa implements WorldDb {
     public void removeWorld(World world) {
         entityManager.getTransaction().begin();
         //if(entityManager.contains(world)){
+        System.out.println("remove");
         entityManager.remove(world);
         //} else {
         //    throw new DbException("Bestaat niet");
@@ -63,6 +65,7 @@ public class WorldDbJpa implements WorldDb {
 
     @Override
     public void removeWorld(long id) {
+        System.out.println("long");
         removeWorld(getWorld(id));
     }
 
@@ -78,33 +81,46 @@ public class WorldDbJpa implements WorldDb {
 
     @Override
     public World getWorld(long id) {
-        return entityManager.find(World.class, id);
+        entityManager.getTransaction().begin();
+        World w = entityManager.find(World.class, id);
+        entityManager.getTransaction().commit();
+        return w;
     }
 
     @Override
     public Map<Long, World> getWorlds() {
+        entityManager.getTransaction().begin();
         List<World> werelden = entityManager.createQuery("select a from World a", World.class).getResultList();
         Map<Long, World> result = new HashMap<Long, World>();
         for (World world : werelden) {
             result.put(world.getId(), world);
         }
 
+        entityManager.getTransaction().commit();
         return result;
     }
 
     @Override
     public boolean contains(World world) {
-        return entityManager.contains(world);
+        entityManager.getTransaction().begin();
+        boolean b = entityManager.contains(world);
+        entityManager.getTransaction().commit();
+        return b;
     }
 
     @Override
     public List<World> getWorldsList() {
-        return entityManager.createQuery("select a from World a", World.class).getResultList();
+        entityManager.getTransaction().begin();
+        List<World> result = entityManager.createQuery("select a from World a", World.class).getResultList();
+        entityManager.getTransaction().commit();
+        return result;
     }
 
     @Override
     public long getNextId() {
+        entityManager.getTransaction().begin();
         List<World> werelden = entityManager.createQuery("select a from World a", World.class).getResultList();
+        entityManager.getTransaction().commit();
         Set<Long> keys = new HashSet<Long>();
         for (World w : werelden) {
             keys.add(w.getId());
