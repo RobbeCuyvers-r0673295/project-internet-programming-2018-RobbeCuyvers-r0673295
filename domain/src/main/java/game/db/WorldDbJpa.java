@@ -28,7 +28,7 @@ public class WorldDbJpa implements WorldDb {
 
 
         entityManagerFactory = Persistence.createEntityManagerFactory("WorldDb");
-        entityManager = entityManagerFactory.createEntityManager();
+        entityManager = entityManagerFactory.createEntityManager(); //todo
 
         World jef = new World(getNextId());
         World tom = new World(getNextId(), "Japan");
@@ -118,9 +118,13 @@ public class WorldDbJpa implements WorldDb {
 
     @Override
     public long getNextId() {
+        System.out.println("\n\n\n getnext");
         entityManager.getTransaction().begin();
+        System.out.println("\n\n\n getnext2");
         List<World> werelden = entityManager.createQuery("select a from World a", World.class).getResultList();
+        System.out.println("\n\n\n getnext4");
         entityManager.getTransaction().commit();
+        System.out.println("\n\n\n getnext5");
         Set<Long> keys = new HashSet<Long>();
         for (World w : werelden) {
             keys.add(w.getId());
@@ -131,12 +135,13 @@ public class WorldDbJpa implements WorldDb {
 
         while (!found){
             newId = new Random().nextLong();
-            if (keys.contains(newId)){
+            if (keys.contains(newId) || newId < 1){
                 found = false;
             } else {
                 found = true;
             }
         }
+        System.out.println(newId);
         return newId;
     }
 }
