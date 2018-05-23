@@ -78,8 +78,8 @@ public class WorldDbJpa implements WorldDb {
     @Override
     public void updateWorld(World world) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        World dbWorld = entityManager.find(World.class, world.getId());
         entityManager.getTransaction().begin();
+        World dbWorld = entityManager.find(World.class, world.getId());
         dbWorld.setName(world.getName());
         dbWorld.setId(world.getId());
         entityManager.getTransaction().commit();

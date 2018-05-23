@@ -38,12 +38,14 @@ public class RESTController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")//niet nodig eigl
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateWorld(@RequestBody World updatedWorld){
         service.updateWorld(updatedWorld);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    @ResponseStatus(HttpStatus.GONE)
     public void deleteWorld(@PathVariable long id){
         service.deleteWorld(id);
     }
