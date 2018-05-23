@@ -26,6 +26,7 @@ public class WorldController {
         this.service = service;
     }
 
+    //TODO: RequestMethods
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getWorlds(){
         /*Map<Long, World> werelden = service.getWorlds();
@@ -96,14 +97,4 @@ public class WorldController {
         return new ModelAndView("remove", "world", service.getWorld(id));
     }
 
-    @RequestMapping(value = "/Random", method = RequestMethod.GET)
-    public String random(){
-        System.out.println("Random");
-
-        RestTemplate restTemplate = new RestTemplate();
-        String[] responseAPI = restTemplate.getForObject("http://quotes.rest/qod.json", String[].class);
-        System.out.println(responseAPI);
-
-        return "redirect:/worlds.htm";
-    }
 }

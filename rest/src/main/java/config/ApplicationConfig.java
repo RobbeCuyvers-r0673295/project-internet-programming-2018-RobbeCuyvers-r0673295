@@ -15,7 +15,7 @@ public class ApplicationConfig {
     @Bean
     public GameService service() {
         return new GameService(new WorldDbJpa());
-    }
+    }//TODO
 
     /*@Bean
     public MessageSource messageSource(){
