@@ -46,7 +46,7 @@ public class WorldController {
     @RequestMapping(value = "/new", method = RequestMethod.GET) //TODO fix next id
     public ModelAndView getNewForm(){
         long id = service.getNextId();
-        System.out.println(id);
+        //System.out.println(id);
         return new ModelAndView("worldForm" ,"world", new World(id)/**/);
     }
 
