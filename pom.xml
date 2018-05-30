@@ -23,7 +23,7 @@
         <spring.version>5.0.3.RELEASE</spring.version>
         <junit.version>RELEASE</junit.version>
         <jpa.version>2.7.1</jpa.version>
-        <derby.version>10.14.2.0</derby.version>
+        <derby.version>10.13.1.1</derby.version>
         <security.version>5.0.1.RELEASE</security.version>
         <selenium.version>3.9.1</selenium.version>
         <payara.home>D:\Robbe\School\IP\Payara5</payara.home>
