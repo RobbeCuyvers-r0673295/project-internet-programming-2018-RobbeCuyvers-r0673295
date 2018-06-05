@@ -27,7 +27,7 @@ public class WorldController {
 
     //TODO: RequestMethods
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getWorlds(){
+    public ModelAndView getWorlds() {
         /*Map<Long, World> werelden = service.getWorlds();
         if (werelden != null){
             for (long id : werelden.keySet()) {
@@ -43,17 +43,17 @@ public class WorldController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET) //TODO fix next id
-    public ModelAndView getNewForm(){
+    public ModelAndView getNewForm() {
         long id = service.getNextId();
         //System.out.println(id);
-        return new ModelAndView("worldForm" ,"world", new World(id)/**/);
+        return new ModelAndView("worldForm", "world", new World(id)/**/);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model){
+    public String save(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model) {
 
         System.out.println("save");
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             return "worldForm";
         } else {
             service.addWorld(world);
@@ -62,10 +62,10 @@ public class WorldController {
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-    public String edit(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model){
+    public String edit(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model) {
 
         System.out.println("edit");
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             return "edit";
         } else {
             service.updateWorld(world);
@@ -77,12 +77,18 @@ public class WorldController {
 
 
     @RequestMapping(value = "/{id}/remove", method = RequestMethod.POST)
-    public String remove(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model){
+    public String remove(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model) {
         System.out.println("delete"); //world == null!!
-        if (result.hasErrors()){
-            return "worlds";
+        if (world != null) {
+            if (world.getName() == null){
+                world.setName("_");
+            }
+        }
+        if (result.hasErrors()) {
+            System.out.println("errors");
+            return "redirect:/worlds.htm";
         } else {
-            if (world.getName() == null || world.getName().equals(null) || world.getName().trim().isEmpty()){
+            if (world.getName() == null || world.getName().equals(null) || world.getName().trim().isEmpty() || world.getName().equals("_")) {
                 try {
                     service.deleteWorld(world.getId());
                 } catch (Exception e) {
@@ -102,12 +108,12 @@ public class WorldController {
 
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-    public ModelAndView getEditForm(@PathVariable long id){
+    public ModelAndView getEditForm(@PathVariable long id) {
         return new ModelAndView("edit", "world", service.getWorld(id));
     }
 
     @RequestMapping(value = "/{id}/remove", method = RequestMethod.GET)
-    public ModelAndView getDeleteForm(@PathVariable long id){
+    public ModelAndView getDeleteForm(@PathVariable long id) {
         return new ModelAndView("remove", "world", service.getWorld(id));
     }
 

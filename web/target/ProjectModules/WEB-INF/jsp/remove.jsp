@@ -31,6 +31,7 @@
                 <spring:message code="remove.text"/>: ${world.name}?
             </p>
             <input type="hidden" id="id" name="id" value="${world.id}">
+            <input type="hidden" id="name" name="name" value="${world.name}">
 
 
             <input type="submit" value="<spring:message code="remove.submit"/>" name="remove" id="remove">
