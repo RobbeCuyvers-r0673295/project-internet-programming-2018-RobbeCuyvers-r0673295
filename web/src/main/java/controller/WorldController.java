@@ -78,17 +78,12 @@ public class WorldController {
 
     @RequestMapping(value = "/{id}/remove", method = RequestMethod.POST)
     public String remove(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model) {
-        System.out.println("delete"); //world == null!!
-        if (world != null) {
-            if (world.getName() == null){
-                world.setName("_");
-            }
-        }
+
         if (result.hasErrors()) {
             System.out.println("errors");
             return "redirect:/worlds.htm";
         } else {
-            if (world.getName() == null || world.getName().equals(null) || world.getName().trim().isEmpty() || world.getName().equals("_")) {
+            if (world.getName() == null || world.getName().equals(null) || world.getName().trim().isEmpty()) {
                 try {
                     service.deleteWorld(world.getId());
                 } catch (Exception e) {
