@@ -14,7 +14,9 @@
 <div class="container">
     <div class="page-header">
         <c:set var="pageTitle"><spring:message code="index.title"/></c:set>
-
+        <jsp:include page="header.jsp">
+            <jsp:param name="title" value="${pageTitle}"/>
+        </jsp:include>
     </div>
 
     <div class="jumbotron">
