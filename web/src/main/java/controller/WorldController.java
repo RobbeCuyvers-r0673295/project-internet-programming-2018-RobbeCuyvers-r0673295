@@ -52,6 +52,8 @@ public class WorldController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model){
+
+        System.out.println("save");
         if (result.hasErrors()){
             return "worldForm";
         } else {
@@ -63,6 +65,7 @@ public class WorldController {
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
     public String edit(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model){
 
+        System.out.println("edit");
         if (result.hasErrors()){
             return "edit";
         } else {
@@ -76,11 +79,23 @@ public class WorldController {
 
     @RequestMapping(value = "/{id}/remove", method = RequestMethod.POST)
     public String remove(@Valid @ModelAttribute("world") World world, BindingResult result, ModelMap model){
-
+        System.out.println("delete"); //world == null!!
         if (result.hasErrors()){
             return "worlds";
         } else {
-            service.deleteWorld(world);
+            if (world.getName() == null || world.getName().equals(null) || world.getName().trim().isEmpty()){
+                try {
+                    service.deleteWorld(world.getId());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                try {
+                    service.deleteWorld(world);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         }
 
         return "redirect:/worlds.htm";

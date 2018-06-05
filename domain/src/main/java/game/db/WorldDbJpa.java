@@ -56,9 +56,9 @@ public class WorldDbJpa implements WorldDb {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         //if(entityManager.contains(world)){
-        System.out.println("remove");//TODO SOUT
+        World dbWordl = entityManager.merge(world);
         try{
-            entityManager.remove(world);
+            entityManager.remove(dbWordl);
         } catch (Exception e) {
             System.out.println(e.getMessage()); //TODO SOUT
         }

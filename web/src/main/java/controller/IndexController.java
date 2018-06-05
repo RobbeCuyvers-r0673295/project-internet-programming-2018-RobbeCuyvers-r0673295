@@ -11,14 +11,19 @@ import domain.Payload;
 @Controller
 @RequestMapping(value = "/index")
 public class IndexController {
-    public IndexController(){}
+    public IndexController() {
+    }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getIndex(){
-        RestTemplate restTemplate = new RestTemplate();
-        Payload response = restTemplate.getForObject("http://quotes.rest/qod.json", Payload.class);
-        return new ModelAndView("index", "quote", response.getContents().getQuotes().get(0));//*/
-        //Quotes quote = new Quotes("Diepe quote (IndexController!)", "Robbe Cuyvers");
-        //return  new ModelAndView("index", "quote", quote);//*/
+    public ModelAndView getIndex() {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            Payload response = restTemplate.getForObject("http://quotes.rest/qod.json", Payload.class);
+            return new ModelAndView("index", "quote", response.getContents().getQuotes().get(0));//*/
+        } catch (Exception e) {
+            Quotes quote = new Quotes("Diepe quote (IndexController!)", "Robbe Cuyvers");
+            return new ModelAndView("index", "quote", quote);//*/
+        }
+
     }
 }
