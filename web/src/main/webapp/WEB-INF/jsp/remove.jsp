@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Robbe
@@ -17,22 +18,23 @@
 <body>
 <div class="container">
     <div class="page-header">
+        <c:set var="pageTitle"><spring:message code="remove.title"/></c:set>
         <jsp:include page="header.jsp">
-            <jsp:param name="title" value="Remove"/>
+            <jsp:param name="title" value="${pageTitle}"/>
         </jsp:include>
     </div>
     <div class="jumbotron">
-        <spring:form class="Form" action="${pageContext.request.contextPath}/worlds/${world.id}/remove.htm"
+        <form:form class="Form" action="${pageContext.request.contextPath}/worlds/${world.id}/remove.htm"
                      method="post" modelAttribute="world">
 
             <p>
-                Zeker dat je ${world.name} wilt verwijderen?
+                <spring:message code="remove.text"/>: ${world.name}?
             </p>
             <input type="hidden" id="id" name="id" value="${world.id}">
 
 
-            <input type="submit" value="Remove" name="remove" id="remove">
-        </spring:form>
+            <input type="submit" value="<spring:message code="remove.submit"/>" name="remove" id="remove">
+        </form:form>
     </div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

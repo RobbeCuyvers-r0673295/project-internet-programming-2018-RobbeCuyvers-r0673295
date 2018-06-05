@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%--
   Created by IntelliJ IDEA.
   User: Robbe
@@ -11,28 +12,29 @@
 <html>
 <head>
     <jsp:include page="head.jsp">
-        <jsp:param name="title" value="Edit ${world.id}"/>
+        <jsp:param name="title" value="Edit"/>
     </jsp:include>
 </head>
 <div class="container">
     <div class="page-header">
+        <c:set var="pageTitle"><spring:message code="edit.title"/></c:set>
         <jsp:include page="header.jsp">
-            <jsp:param name="title" value="Remove"/>
+            <jsp:param name="title" value="${pageTitle}"/>
         </jsp:include>
     </div>
     <div class="jumbotron">
 
-        <spring:form class="Form" method="POST" action="${pageContext.request.contextPath}/worlds/${world.id}/edit.htm"
-                     modelAttribute="world">
+        <form:form class="Form" method="POST" action="${pageContext.request.contextPath}/worlds/${world.id}/edit.htm"
+                   modelAttribute="world">
             <input type="hidden" id="id" name="id" value="${world.id}">
             <p>
-                <label for="name">World name</label>
-                <input type="text" id="name" , name="name" , value="${world.name}">
+                <label for="name"><spring:message code="edit.name"/></label>
+                <input type="text" id="name" name="name" value="${world.name}">
             </p>
             <p>
-                <input type="submit" name="submit" id="submit" value="Submit">
+                <input type="submit" name="submit" id="submit" value="<spring:message code="edit.submit"/>">
             </p>
-        </spring:form>
+        </form:form>
     </div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

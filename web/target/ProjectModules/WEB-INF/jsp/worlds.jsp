@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Robbe
@@ -14,18 +15,19 @@
 <body>
 <div class="container">
     <div class="page-header">
+        <c:set var="pageTitle"><spring:message code="overview.title"/></c:set>
         <jsp:include page="header.jsp">
-            <jsp:param name="title" value="Remove"/>
+            <jsp:param name="title" value="${pageTitle}"/>
         </jsp:include>
     </div>
     <div class="jumbotron">
 
         <table class="table table-bordered table-striped table-hover">
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Edit</th>
-                <th>Remove</th>
+                <th><spring:message code="table.id"/></th>
+                <th><spring:message code="table.name"/></th>
+                <th><spring:message code="table.edit"/></th>
+                <th><spring:message code="table.remove"/></th>
             </tr>
             <c:forEach var="world" items="${worlds}">
                 <tr>
@@ -33,18 +35,18 @@
                     <td>${world.value.name}</td>
                     <td>
                         <a href="<c:url value="worlds/${world.key}/edit.htm"/>">
-                            Edit
+                            <spring:message code="table.edit"/>
                         </a>
                     </td>
                     <td>
                         <a href="<c:url value="worlds/${world.key}/remove.htm"/>">
-                            Remove
+                            <spring:message code="table.remove"/>
                         </a>
                     </td>
                 </tr>
             </c:forEach>
             <tr>
-                <td colspan="4" class="text-center"><a href="<c:url value="/worlds/new.htm"/>" class="btn btn-primary">New</a></td>
+                <td colspan="4" class="text-center"><a href="<c:url value="/worlds/new.htm"/>" class="btn btn-primary"><spring:message code="table.new"/></a></td>
             </tr>
         </table>
     </div>

@@ -1,15 +1,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <header role="banner">
     <!--<img alt="Books" src="images/books.jpg">-->
-    <h1><span>Worlds</span></h1>
+    <h1><span><spring:message code="website.title"/> </span></h1>
     <div class="btn-group">
         <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-toggle="dropdown">Menu</button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="${pageContext.request.contextPath}/index.htm">Home</a>
-            <a class="dropdown-item" href="${pageContext.request.contextPath}/worlds.htm">Worlds</a>
-            <a class="dropdown-item" href="${pageContext.request.contextPath}/worlds/new.htm">Create new</a>
-            <a class="dropdown-item" href="<c:url value="/logout"/>">Log out</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/index.htm"><spring:message code="nav.home"/> </a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/worlds.htm"><spring:message code="nav.overview"/> </a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/worlds/new.htm"><spring:message code="nav.new"/> </a>
+            <%--<a class="dropdown-item" href="<c:url value="/logout"/>">Log out</a>--%>
         </div>
     </div>
     <%--

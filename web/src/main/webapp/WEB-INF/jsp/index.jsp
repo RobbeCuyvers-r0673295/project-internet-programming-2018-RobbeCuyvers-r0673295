@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -11,16 +13,15 @@
 <body>
 <div class="container">
     <div class="page-header">
-        <jsp:include page="header.jsp">
-            <jsp:param name="title" value="Home"/>
-        </jsp:include>
+        <c:set var="pageTitle"><spring:message code="index.title"/></c:set>
+
     </div>
 
     <div class="jumbotron">
-        <h2>Quote of the day</h2>
+        <h2><spring:message code="quote.title"/></h2>
         <div id="quote">
             <p>${quote.quote}</p>
-            <p>- ${quote.author}</p>
+            <p>- <a href="https://www.google.com/${quote.author}">${quote.author}</a></p>
         </div>
     </div>
 </div>
