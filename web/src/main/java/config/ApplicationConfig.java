@@ -1,8 +1,7 @@
 package config;
 
 
-import game.db.WorldDbJpa;
-import game.db.WorldDbLocal;
+import game.db.DbFactory;
 import game.domain.GameService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +13,7 @@ public class ApplicationConfig {
 
     @Bean
     public GameService service() {
-        return new GameService(new WorldDbJpa());
+        return new GameService(DbFactory.createDb("jpa"));
     } //TODO
 
     @Bean
