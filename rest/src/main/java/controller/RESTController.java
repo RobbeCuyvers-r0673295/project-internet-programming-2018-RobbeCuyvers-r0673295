@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/rest")
+@RequestMapping(value = "/rest", produces = "application/json")
 public class RESTController {
     private final GameService service;
 
@@ -18,13 +18,13 @@ public class RESTController {
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public List<World> getWorlds() {
         return  service.getWorldsList();
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET, value = "{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "{id}", produces = "application/json")
     public World getWorld(@PathVariable long id){
        return service.getWorld(id);
     }
