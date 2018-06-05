@@ -11,5 +11,6 @@ game\domain\Consumer.class
 game\domain\Observer.class
 game\domain\Farm.class
 game\db\WorldDbJpa.class
+game\db\DbFactory.class
 game\domain\DomainException.class
 game\domain\World.class

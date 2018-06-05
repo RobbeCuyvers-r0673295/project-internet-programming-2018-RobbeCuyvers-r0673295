@@ -12,16 +12,6 @@
     <option value="fr" th:th:text="#{lang.fr}"></option>
 </select>--%>
 Language : <a href="?lang=en">English</a>|<a href="?lang=nl">Nederlands</a>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#locales").change(function () {
-            var selectedOption = $('#languages').val();
-            if (selectedOption != ''){
-                window.location.replace('?lang=' + selectedOption);
-            }
-        });
-    });
-</script>
 <!--
 <c:set var="languageCookie" value="${cookie['org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE']}"/>
 <li>
